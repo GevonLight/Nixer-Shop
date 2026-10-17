@@ -32,10 +32,9 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 let generatedCode = null, pendingUserEmail = null, pendingUserPass = null;
 
 // ============================================================
-// БЕЗОПАСНАЯ ПРИВЯЗКА СОБЫТИЙ (Исправление ошибки в консоли)
+// БЕЗОПАСНАЯ ПРИВЯЗКА СОБЫТИЙ
 // ============================================================
 function setupEventListeners() {
-    // Элементы навигации и модалки
     const openAuthBtn = document.getElementById('open-auth-btn');
     const closeAuthBtn = document.getElementById('close-auth-btn');
     const authModal = document.getElementById('auth-modal');
@@ -43,7 +42,8 @@ function setupEventListeners() {
     if (openAuthBtn) openAuthBtn.onclick = () => { if(authModal) authModal.style.display = 'flex'; };
     if (closeAuthBtn) closeAuthBtn.onclick = () => { if(authModal) authModal.style.display = 'none'; };
 
-    // Формы входа/регистрации
+    window.onclick = (event) => { if (event.target == authModal) authModal.style.display = 'none'; };
+
     const showReg = document.getElementById('show-reg');
     const showLogin = document.getElementById('show-login');
     const backToLogin = document.getElementById('back-to-login');
@@ -58,10 +58,9 @@ function setupEventListeners() {
         showLogin.onclick = () => { regForm.style.display = 'none'; loginForm.style.display = 'block'; };
     }
     if (backToLogin && codeForm && loginForm) {
-        backToLogin.onclick = () => { codeForm.style.//display = 'none'; loginForm.style.display = 'block'; };
+        backToLogin.onclick = () => { codeForm.style.display = 'none'; loginForm.style.display = 'block'; };
     }
 
-    // Кнопка сброса пароля
     const forgotPassBtn = document.getElementById('forgot-pass');
     if (forgotPassBtn) {
         forgotPassBtn.onclick = async () => {
@@ -71,7 +70,6 @@ function setupEventListeners() {
         };
     }
 
-    // Кнопка регистрации
     const regBtn = document.getElementById('do-reg');
     if (regBtn) {
         regBtn.onclick = async () => {
@@ -89,7 +87,6 @@ function setupEventListeners() {
         };
     }
 
-    // Кнопка входа
     const loginBtn = document.getElementById('do-login');
     if (loginBtn) {
         loginBtn.onclick = async () => {
@@ -108,7 +105,6 @@ function setupEventListeners() {
         };
     }
 
-    // Кнопка верификации кода
     const verifyBtn = document.getElementById('do-verify');
     if (verifyBtn) {
         verifyBtn.onclick = async () => {
@@ -119,7 +115,6 @@ function setupEventListeners() {
         };
     }
 
-    // Кнопка выхода
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.onclick = () => signOut(auth).then(() => location.href = 'index.html');
@@ -127,7 +122,7 @@ function setupEventListeners() {
 }
 
 // ============================================================
-// ПРОФИЛЬ, ПРАВА И МАГАЗИН
+// ПРОФИЛЬ И ПРАВА
 // ============================================================
 onAuthStateChanged(auth, async (user) => {
     const navAuth = document.getElementById('nav-auth');
@@ -140,7 +135,7 @@ onAuthStateChanged(auth, async (user) => {
         if (adminLink && userData?.role === 'admin') adminLink.style.display = 'block';
         
         if (window.location.pathname.includes('admin.html') && userData?.role !== 'admin') {
-            alert("Нет доступа!"); window.location.href = 'index.//html';
+            alert("Нет доступа!"); window.location.href = 'index.html';
         }
 
         if (window.location.pathname.includes('profile.html') && userData) {
@@ -162,9 +157,7 @@ onAuthStateChanged(auth, async (user) => {
             }
         }
 
-        if (window.location.pathname.includes('index.html')) {
-            const authSection = document.getElementById('auth-section');
-            if(authSection) authSection.style.display = 'none';
+        if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
             const display = document.getElementById('user-display');
             if (display) {
                 display.style.display = 'block';
@@ -185,7 +178,9 @@ function getTitleClass(title) {
     return "user";
 }
 
-// Загрузка товаров на главной
+// ============================================================
+// МАГАЗИН (ИСПРАВЛЕН a la-загрузка)
+// ============================================================
 async function loadProducts() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
@@ -196,75 +191,4 @@ async function loadProducts() {
         snap.forEach(docSnap => {
             const p = docSnap.data();
             const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `<img src="${p.image || 'https://via.placeholder.com/200'}" class="product-image"><div class="product-name">${p.name}</div><div class="product-description">${p.description}</div><div class="product-price">${p.price} ₽</div><button class="btn btn-buy" onclick="alert('Заказ на ${p.name} отправлен!')">Купить</button>`;
-            grid.appendChild(card);
-        });
-    } catch (e) { grid.innerHTML = "<div class='loading'>Ошибка загрузки.</div>"; }
-}
-
-// Админка: Функции
-async function loadAdminProducts() {
-    const body = document.getElementById('prod-list-body');
-    if (!body) return;
-    const snap = await getDocs(collection(db, "products"));
-    body.innerHTML = "";
-    snap.forEach(docSnap => {
-        const p = docSnap.data();
-        body.innerHTML += `<tr><td>${p.name}</td><td>${p.price} ₽</td><td><button class="btn btn-danger btn-small" onclick="deleteProduct('${docSnap.id}')">Удалить</button></td></tr>`;
-    });
-}
-
-window.deleteProduct = async (id) => {
-    if (confirm("Удалить?")) { await deleteDoc(doc(db, "products", id)); location.reload(); }
-};
-
-const addProdBtn = document.getElementById('add-prod-btn');
-if (addProdBtn) {
-    addProdBtn.onclick = async () => {
-        const name = document.getElementById('prod-name').value;
-        const price = document.getElementById('prod-price').value;
-        const desc = document.getElementById('prod-desc').value;
-        const img = document.getElementById('prod-img').value;
-        if (!name || !price) return alert("Имя и цена обязательны!");
-        const prodId = name.toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, '');
-        await setDoc(doc(db, "products", prodId), { name, price, description: desc, image: img });
-        alert("Товар добавлен!"); location.reload();
-    };
-}
-
-const findUserBtn = document.getElementById('find-user-btn');
-if (findUserBtn) {
-    findUserBtn.onclick = async () => {
-        const uid = document.getElementById('edit-id').value;
-        if (!uid) return alert("Введите UID!");
-        const userSnap = await getDoc(doc(db, "users", uid));
-        if (userSnap.exists()) {
-            const data = userSnap.data();
-            document.getElementById('edit-nick').value = data.nick;
-            document.getElementById('edit-title').value = data.title;
-            document.getElementById('edit-avatar').value = data.avatar;
-        } else { alert("Не найден!"); }
-    };
-}
-const saveUserBtn = document.getElementById('save-user-btn');
-if (saveUserBtn) {
-    saveUserBtn.onclick = async () => {
-        const uid = document.getElementById('edit-id').value;
-        if (!uid) return alert("Введите UID!");
-        await updateDoc(doc(db, "users", uid), {
-            nick: document.getElementById('edit-nick').value,
-            title: document.getElementById('edit-title').value,
-            avatar: document.getElementById('edit-avatar').value,
-        });
-        alert("Обновлено!");
-    };
-}
-
-const logoutBtn = document.getElementById('logout-btn');
-if (logoutBtn) { logoutBtn.onclick = () => signOut(auth).then(() => location.href = 'index.html'); }
-
-// ЗАПУСК
-setupEventListeners();
-if (window.location.pathname.includes('index.html')) loadProducts();
-if (window.location.pathname.includes('admin.html')) loadAdminProducts();
+            card.className = '*

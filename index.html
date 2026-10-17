@@ -27,7 +27,18 @@
             <div class="loading">Загрузка товаров...</div>
         </div >
 
-        <div id="auth-section" style="margin-top: 50px;">
+        <!-- Скрытый блок приветствия (появится после входа) -->
+        <div id="user-display" style="display:none; text-align: center; margin-top: 30px;">
+            <h2 id="welcome-text"></h2>
+        </div >
+    </div >
+
+    <!-- МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-auth-btn">&times;</span>
+            
+            <!-- Форма Входа -->
             <div id="login-form" class="admin-container">
                 <h2 style="text-align: center;">🔑 Вход</h2>
                 <input type="email" id="login-email" class="admin-input" placeholder="Email">
@@ -39,6 +50,7 @@
                 <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Нет аккаунта? <a href="#" id="show-reg" style="color:#2ecc71;">Регистрация</a></p>
             </div >
 
+            <!-- Форма Регистрации -->
             <div id="reg-form" class="admin-container" style="display:none;">
                 <h2 style="text-align: center;">📝 Регистрация</h2>
                 <input type="text" id="reg-nick" class="admin-input" placeholder="Никнейм">
@@ -48,24 +60,12 @@
                 <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Уже есть аккаунт? <a href="#" id="show-login" style="color:#2ecc71;">Войти</a></p>
             </div >
 
+            <!-- Форма Кода -->
             <div id="code-form" class="admin-container" style="display:none;">
                 <h2 style="text-align: center;">📩 Код подтверждения</h2>
-                <input type="text" id="auth-code" class="admin-input" placeholder="000000" style="text-align:center; font-size: 1.5rem;">
+                <input type="text" id="auth-code" class="admin-//input" placeholder="000000" style="text-align:center; font-size: 1.5rem;">
                 <button class="btn btn-save" id="do-verify">Подтвердить</button>
                 <p style="text-align: center;"><a href="#" id="back-to-login" style="color:#2ecc71;">Назад</a></p>
-            </div >
-        </div >
-    </div >
-
-    <!-- Модалка для входа (только для тех, кто нажал "Войти" в меню) -->
-    <div id="auth-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-content">
-            <span class="close-modal" id="close-auth-btn">&times;</span>
-            <div id="modal-login-form" class="admin-container">
-                <h2 style="text-align: center;">🔑 Вход</h2>
-                <input type="email" id="modal-login-email" class="admin-input" placeholder="Email">
-                <input type="password" id="modal-login-pass" class="admin-input" placeholder="Пароль">
-                <button class="btn btn-save" id="modal-do-login">Войти</button>
             </div >
         </div >
     </div >
@@ -82,7 +82,7 @@
             <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="payment-icon" alt="USDT">
         </div >
         <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div >
-    </footer>
+    </footer >
 
     <script type="module" src="app.js"></script>
 </body >
