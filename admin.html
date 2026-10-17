@@ -15,34 +15,61 @@
         <a href="admin.html" style="color: #2ecc71; font-weight: bold;">Админ-панель</a>
     </nav>
 
-    <div class="admin-container" style="margin-top: 50px;">
-        <h2 style="text-align: center;">⚙️ Управление пользователями</h2>
-        <input type="text" id="edit-id" class="admin-input" placeholder="Введите UID пользователя">
-        <button class="btn btn-save" id="find-user-btn" style="background: #444; margin-bottom: 20px;">🔍 Найти пользователя</button>
-        <hr style="border: 0.5px solid #333; margin-bottom: 20px;">
-        <label>Никнейм:</label>
-        <input type="text" id="edit-nick" class="admin-input">
-        <label>Тайтл:</label>
-        <select id="edit-title" class="admin-input">
-            <option value="User">User</option>
-            <option value="Moderator">Moderator</option>
-            <option value="Admin">Admin</option>
-            <option value=") Медиа длинное">) Медиа длинное</option>
-        </select>
-        <label>Аватарка (URL):</label>
-        <input type="text" id="edit-avatar" class="admin-input">
-        <button class="btn btn-save" id="save-user-btn">💾 Сохранить изменения</button>
-    </div >
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-column"><h3>Nixer Shop</h3><p>Админ-центр управления.</p></div>
-            <div class="footer-column"><h3>Навигация</h3><a href="index.html">Главная</a><a href="shop.html">Каталог</a><a href="profile.html">Профиль</a><a href="offer.html">Оферта</a></div>
-            <div class="footer-column"><h3>Поддержка</h3><a href="https://t.//t.me/Nixer_Exe" target="_blank">✈️ Telegram: @Nixer_Exe</a></div>
-        </div >
-        <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
-    </footer >
-
+    <div class="admin-container" style="max-width: 900px; margin-top: 50px;">
+        <h2 style="text-align: center;">⚙️ Панель Управления</h2>
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="openTab('users-tab')">Пользователи</button>
+            <button class="tab-btn" onclick="openTab('products-tab')">Товары</button>
+            <button class="tab-btn" onclick="openTab('promo-tab')">Промокоды</button>
+        </div>
+        <div id="users-tab" class="tab-content active">
+            <h3>Пользователь</h3>
+            <input type="text" id="edit-id" class="admin-input" placeholder="UID">
+            <button class="btn btn-save" id="find-user-btn" style="background: #444; margin-bottom: 20px;">Найти</button>
+            <hr style="border: 0.5px solid #333;">
+            <label>Ник:</label><input type="text" id="edit-nick" class="admin-input">
+            <label>Тайтл:</label>
+            <select id="edit-title" class="admin-input">
+                <option value="User">User</option>
+                <option value="Moderator">Moderator</option>
+                <option value="Admin">Admin</option>
+                <option value=") Медиа длинное">) Медиа длинное</option>
+            </select>
+            <label>Аватар (URL):</label><input type="text" id="edit-avatar" class="admin-input">
+            <button class="btn btn-save" id="save-user-btn">Сохранить</button>
+        </div>
+        <div id="products-tab" class="tab-content">
+            <h3>Добавить товар</h3>
+            <input type="text" id="prod-name" class="admin-input" placeholder="Название">
+            <input type="text" id="prod-price" class="admin-input" placeholder="Цена">
+            <input type="text" id="prod-desc" class="admin-input" placeholder="Описание">
+            <input type="text" id="prod-img" class="admin-input" placeholder="Ссылка на фото">
+            <button class="btn btn-save" id="add-prod-btn">Добавить</button>
+            <table class="admin-table">
+                <thead><tr><th>Товар</th><th>Цена</th><th>Действие</th></tr></thead>
+                <tbody id="prod-list-body"></tbody>
+            </table>
+        </div>
+        <div id="promo-tab" class="tab-content">
+            <h3>Создать промокод</h3>
+            <input type="text" id="promo-code" class="admin-input" placeholder="Код">
+            <input type="text" id="promo-discount" class="admin-input" placeholder="Скидка %">
+            <button class="btn btn-save" id="add-promo-btn">Создать</button>
+            <table class="admin-table">
+                <thead><tr><th>Код</th><th>Скидка</th><th>Действие</th></tr></thead>
+                <tbody id="promo-list-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <footer><div class="footer-bottom">© 2024 Nixer Shop. Admin Panel.</div></footer>
+    <script>
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
     <script type="module" src="app.js"></script>
-</body >
-</html >
+</body>
+</html>
