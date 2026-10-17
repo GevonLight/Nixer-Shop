@@ -3,73 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nixer Shop - Вход</title>
+    <title>Nixer Shop - Главная</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body style="min-height: 100vh; display: flex; flex-direction: column;">
     <nav>
         <a href="index.html">Главная</a>
-        <a href="shop.html">Каталог</a>
         <a href="profile.html">Профиль</a>
         <a href="offer.html" style="color: #888; font-size: 0.9rem;">Оферта</a>
         <a href="admin.html" id="admin-link" style="display:none;">Админ-панель</a>
     </nav>
 
-    <div class="user-info" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div id="login-form" class="admin-container">
-            <h2 style="text-align: center;">🔑 Вход в Nixer Shop</h2>
-            <input type="email" id="login-email" class="admin-input" placeholder="Email">
-            <input type="password" id="login-pass" class="admin-input" placeholder="Пароль">
-            <div style="text-align: right; margin-bottom: 15px;">
-                <a href="#" id="forgot-pass" style="color:#aaa; font-size:0.8rem; text-decoration:none;">Забыли пароль?</a>
-            </div >
-            <button class="btn btn-save" id="do-login">Войти</button>
-            <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Нет аккаунта? <a href="#" id="show-reg" style="color:#2ecc71;">Зарегистрироваться</a></p>
-        </div >
+    <div class="user-info">
+        <h1>🛍️ Витрина Nixer Shop</h1>
+        <p style="color: #aaa; margin-bottom: 30px;">Лучший софт по доступным ценам</p>
+        
+        <!-- Сетка товаров -->
+        <div id="products-grid" class="products-grid">
+            <div class="loading">Загрузка товаров...</div>
+        </div>
 
-        <div id="reg-form" class="admin-container" style="display:none;">
-            <h2 style="text-align: center;">📝 Регистрация</h2>
-            <input type="text" id="reg-nick" class="admin-input" placeholder="Придумайте никнейм">
-            <input type="email" id="reg-email" class="admin-input" placeholder="Ваш Email">
-            <input type="password" id="reg-pass" class="admin-input" placeholder="Придумайте пароль">
-            <button class="btn btn-save" id="do-reg" style="background: #3498db;">Создать аккаунт</button>
-            <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Уже есть аккаунт? <a href="#" id="show-login" style="color:#2ecc71;">Войти</a></p>
-        </div >
+        <!-- Блок Входа/Регистрации (Появляется если не авторизован) -->
+        <div id="auth-section" style="margin-top: 50px;">
+            <div id="login-form" class="admin-container">
+                <h2 style="text-align: center;">🔑 Вход</h2>
+                <input type="email" id="login-email" class="admin-input" placeholder="Email">
+                <input type="password" id="login-pass" class="admin-input" placeholder="Пароль">
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <a href="#" id="forgot-pass" style="color:#aaa; font-size:0.8rem; text-decoration:none;">Забыли пароль?</a>
+                </div>
+                <button class="btn btn-save" id="do-login">Войти</button>
+                <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Нет аккаунта? <a href="#" id="show-reg" style="color:#2ecc71;">Регистрация</a></p>
+            </div>
 
-        <div id="user-display" style="display:none; text-align: center;">
-            <h2 id="welcome-text"></h2>
-            <button class="btn" id="logout-btn" style="background: #ff4d4d; color: white;">Выйти из аккаунта</button>
-        </div >
-    </div >
+            <div id="reg-form" class="admin-container" style="display:none;">
+                <h2 style="text-align: center;">📝 Регистрация</h2>
+                <input type="text" id="reg-nick" class="admin-input" placeholder="Никнейм">
+                <input type="email" id="reg-email" class="admin-input" placeholder="Email">
+                <input type="password" id="reg-pass" class="admin-input" placeholder="Пароль">
+                <button class="btn btn-save" id="do-reg" style="background: #3498db;">Создать аккаунт</button>
+                <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Уже есть аккаунт? <a href="#" id="show-login" style="color:#2ecc71;">Войти</a></p>
+            </div>
+
+            <div id="code-form" class="admin-container" style="display:none;">
+                <h2 style="text-align: center;">📩 Код подтверждения</h2>
+                <input type="text" id="auth-code" class="admin-input" placeholder="000000" style="text-align:center; font-size: 1.5rem;">
+                <button class="btn btn-save" id="do-verify">Подтвердить</button>
+                <p style="text-align: center;"><a href="#" id="back-to-login" style="color:#2ecc71;">Назад</a></p>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-column">
-                <h3>Nixer Shop</h3>
-                <p>Лучший магазин цифровых товаров и услуг. Качество, скорость и безопасность в каждой покупке.</p>
-            </div >
-            <div class="footer-column">
-                <h3>Навигация</h3>
-                <a href="index.html">Главная</a>
-                <a href="shop.html">Каталог</a>
-                <a href="profile.html">Личный кабинет</a>
-                <a href="offer.html">Публичная оферта</a>
-            </div >
-            <div class="footer-column">
-                <h3>Поддержка</h3>
-                <a href="https://t.me/Nixer_Exe" target="_blank">✈️ Telegram: @Nixer_Exe</a>
-                <a href="mailto:nixershop.official@gmail.com">✉️ Email: nixershop.official@gmail.com</a>
-            </div >
-        </div >
+            <div class="footer-column"><h3>Nixer Shop</h3><p>Лучший магазин цифровых товаров.</p></div>
+            <div class="footer-column"><h3>Навигация</h3><a href="index.html">Главная</a><a href="profile.html">Профиль</a><a href="offer.html">Оферта</a></div>
+            <div class="footer-column"><h3>Поддержка</h3><a href="https://t.me/Nixer_Exe" target="_blank">✈️ Telegram</a><a href="mailto:nixershop.official@gmail.com">✉️ Email</a></div>
+        </div>
         <div class="payment-methods">
             <img src="https://i.imgur.com/RzYmEa8.png" class="payment-icon" alt="FunPay">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mir_logo.svg/1200px-Mir_logo.svg.png" class="payment-icon" alt="МИР">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mir_logo.svg/1200px-Mir_//logo.svg.png" class="payment-icon" alt="МИР">
             <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="payment-icon" alt="USDT">
-        </div >
+        </div>
         <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
-    </footer >
+    </footer>
 
     <script type="module" src="app.js"></script>
-</body >
-</html >
+</body>
+</html>
