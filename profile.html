@@ -16,8 +16,6 @@
     </nav>
 
     <div class="user-info" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        
-        <!-- БЛОК ПРОФИЛЯ (Виден авторизованным) -->
         <div id="profile-data" style="display:none; flex-direction: column; align-items: center;">
             <img src="" id="user-avatar" class="avatar">
             <div id="user-title" class="user-info">Загрузка...</div>
@@ -27,25 +25,22 @@
             <button class="btn" id="logout-btn" style="background: #ff4d4d; color: white;">Выйти</button>
         </div>
 
-        <!-- БЛОК ВХОДА (Виден НЕавторизованным) -->
         <div id="auth-section">
             <div id="login-form" class="admin-container">
-                <h2 style="text-align: center;">🔑 Вход для доступа к профилю</h2>
+                <h2 style="text-align: center;">🔑 Вход в профиль</h2>
                 <input type="email" id="login-email" class="admin-input" placeholder="Email">
                 <input type="password" id="login-pass" class="admin-input" placeholder="Пароль">
                 <button class="btn btn-save" id="do-login">Войти</button>
-                <p style="margin-top:15px; text-align: center;">Нет аккаунта? <a href="#" id="show-reg" style="color:#2ecc71;">Регистрация</a></p>
+                <p style="margin-top:15px; text-align: center;"><a href="#" id="show-reg" style="color:#2ecc71;">Регистрация</a></p>
             </div>
-
             <div id="reg-form" class="admin-container" style="display:none;">
                 <h2 style="text-align: center;">📝 Регистрация</h2>
                 <input type="text" id="reg-nick" class="admin-input" placeholder="Никнейм">
                 <input type="email" id="reg-email" class="admin-input" placeholder="Email">
                 <input type="password" id="reg-pass" class="admin-input" placeholder="Пароль">
                 <button class="btn btn-save" id="do-reg" style="background: #3498db;">Создать</button>
-                <p style="margin-top:15px; text-align: center;"><a href="#" id="show-login" style="color:#2ecc71;">Назад к входу</a></p>
+                <p style="margin-top:15px; text-align: center;"><a href="#" id="show-login" style="color:#2ecc71;">Назад</a></p>
             </div>
-
             <div id="code-form" class="admin-container" style="display:none;">
                 <h2 style="text-align: center;">📩 Код подтверждения</h2>
                 <input type="text" id="auth-code" class="admin-input" placeholder="000000" style="text-align:center;">
@@ -56,13 +51,12 @@
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-column"><h3>Nixer Shop</h3><p>Личный кабинет пользователя.</p></div>
+            <div class="footer-column"><h3>Nixer Shop</h3><p>Личный кабинет.</p></div>
             <div class="footer-column"><h3>Навигация</h3><a href="index.html">Главная</a><a href="profile.html">Профиль</a><a href="offer.html">Оферта</a></div>
             <div class="footer-column"><h3>Поддержка</h3><a href="https://t.me/Nixer_Exe" target="_blank">✈️ Telegram</a></div>
         </div>
         <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
     </footer>
-
     <script type="module" src="app.js"></script>
 </body>
 </html>

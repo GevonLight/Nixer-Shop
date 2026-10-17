@@ -31,23 +31,32 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 
 let generatedCode = null, pendingUserEmail = null, pendingUserPass = null;
 
-// --- UI ПЕРЕКЛЮЧЕНИЕ ---
+// UI Переключение
 const loginForm = document.getElementById('login-form');
 const regForm = document.getElementById('reg-form');
 const codeForm = document.getElementById('code-form');
-const authSection = document.getElementById('auth-section');
 
 if(document.getElementById('show-reg')) {
     document.getElementById('show-reg').onclick = () => { if(loginForm) loginForm.style.display = 'none'; if(regForm) regForm.style.display = 'block'; };
 }
 if(document.getElementById('show-login')) {
-    document.getElementById('show-login').onclick = () => { if(regForm) regForm.style.display = 'none'; if(loginForm) loginForm.style.display = 'block'; };
+    document.getElementById('show-login').onclick = () => { if(regForm) regForm.style.display = 'none'; if(loginForm) loginForm.style.//display = 'block'; };
 }
 if(document.getElementById('back-to-login')) {
     document.getElementById('back-to-login').onclick = () => { if(codeForm) codeForm.style.display = 'none'; if(loginForm) loginForm.style.display = 'block'; };
 }
 
-// --- РЕГИСТРАЦИЯ С РЕФЕРАЛКОЙ ---
+// Сброс пароля
+const forgotPassBtn = document.getElementById('forgot-pass');
+if (forgotPassBtn) {
+    forgotPassBtn.onclick = async () => {
+        const email = document.getElementById('login-email').value;
+        if (!email) return alert("Введите Email!");
+        try { await sendPasswordResetEmail(auth, email); alert("Инструкции отправлены!"); } catch (e) { alert("Ошибка: " + e.message); }
+    };
+}
+
+// Регистрация с Рефкой
 const regBtn = document.getElementById('do-reg');
 if (regBtn) {
     regBtn.onclick = async () => {
@@ -60,12 +69,12 @@ if (regBtn) {
             const uid = userCredential.user.uid;
             const refCode = "NIXER" + Math.random().toString(36).substring(2, 8).toUpperCase();
             await setDoc(doc(db, "users", uid), { uid, nick, email, title: "User", role: "user", avatar: DEFAULT_AVATAR, referralCode: refCode, balance: 0, referredBy: null });
-            alert("Аккаунт создан!"); location.reload();
+            alert("Аккаунт создан! Ваш реф-код: " + refCode); location.reload();
         } catch (e) { alert("Ошибка: " + e.message); }
     };
 }
 
-// --- ВХОД ---
+// Вход
 const loginBtn = document.getElementById('do-login');
 if (loginBtn) {
     loginBtn.onclick = async () => {
@@ -80,7 +89,7 @@ if (loginBtn) {
             if(loginForm) loginForm.style.display = 'none';
             if(codeForm) codeForm.style.display = 'block';
             alert("Код отправлен!");
-        } catch (e) { alert("Ошибка входа!"); }
+        } catch (e) { alert("Неверный email или пароль!"); }
     };
 }
 
@@ -94,17 +103,7 @@ if (verifyBtn) {
     };
 }
 
-// --- СБРОС ПАРОЛЯ ---
-const forgotPassBtn = document.getElementById('forgot-pass');
-if (forgotPassBtn) {
-    forgotPassBtn.onclick = async () => {
-        const email = document.getElementById('login-email').value;
-        if (!email) return alert("Введите Email!");
-        try { await sendPasswordResetEmail(auth, email); alert("Инструкции отправлены!"); } catch (e) { alert("Ошибка"); }
-    };
-}
-
-// --- ПРОФИЛЬ И ПРАВА ---
+// Профиль и Права
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const userSnap = await getDoc(doc(db, "users", user.uid));
@@ -112,7 +111,6 @@ onAuthStateChanged(auth, async (user) => {
         const adminLink = document.getElementById('admin-link');
         if (adminLink && userData?.role === 'admin') adminLink.style.display = 'block';
         if (window.location.pathname.includes('admin.html') && userData?.role !== 'admin') { alert("Нет доступа!"); window.location.href = 'index.html'; }
-        
         if (window.location.pathname.includes('profile.html') && userData) {
             document.getElementById('user-avatar').src = userData.avatar;
             document.getElementById('user-id').innerText = `ID: ${userData.uid}`;
@@ -125,18 +123,14 @@ onAuthStateChanged(auth, async (user) => {
             const profileDiv = document.querySelector('.user-info');
             const refBox = document.createElement('div');
             refBox.className = 'ref-box';
-            refBox.innerHTML = `<strong>Ваша реф-ссылка:</strong><br><span id="ref-link">https://gevonlight.github.io/Nixer-Shop/?ref=${userData.referralCode}</span>`;
+            refBox.innerHTML = `<strong>Ваша реф-ссылка:</strong><br><span id="ref-link">${window.location.origin}/index.html?ref=${userData.referralCode}</span>`;
             refBox.onclick = () => { navigator.clipboard.writeText(refBox.innerText); alert("Скопировано!"); };
             profileDiv.appendChild(refBox);
         }
-
         if (window.location.pathname.includes('index.html')) {
-            if(authSection) authSection.style.display = 'none';
+            if(document.getElementById('auth-section')) document.getElementById('auth-section').style.display = 'none';
             const display = document.getElementById('user-display');
-            if (display) {
-                display.style.display = 'block';
-                document.getElementById('welcome-text').innerHTML = `Привет, <span class="nick-${getTitleClass(userData?.title)}">${userData?.nick}</span>!`;
-            }
+            if (display) { display.style.display = 'block'; document.getElementById('welcome-text').innerHTML = `Привет, <span class="nick-${getTitleClass(userData?.title)}">${userData?.nick}</span>!`; }
         }
     } else {
         if (window.location.pathname.includes('profile.html') || window.location.pathname.includes('admin.html')) window.location.href = 'index.html';
@@ -150,7 +144,7 @@ function getTitleClass(title) {
     return "user";
 }
 
-// --- МАГАЗИН (ЗАГРУЗКА ТОВАРОВ) ---
+// Магазин
 async function loadProducts() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
@@ -169,7 +163,7 @@ async function loadProducts() {
 }
 if (window.location.pathname.includes('index.html')) loadProducts();
 
-// --- АДМИНКА: ТОВАРЫ ---
+// Админка: Товары
 const addProdBtn = document.getElementById('add-prod-btn');
 if (addProdBtn) {
     addProdBtn.onclick = async () => {
@@ -183,7 +177,6 @@ if (addProdBtn) {
         alert("Товар добавлен!"); location.reload();
     };
 }
-
 async function loadAdminProducts() {
     const body = document.getElementById('prod-list-body');
     if (!body) return;
@@ -194,12 +187,11 @@ async function loadAdminProducts() {
         body.innerHTML += `<tr><td>${p.name}</td><td>${p.price} ₽</td><td><button class="btn btn-danger btn-small" onclick="deleteProduct('${docSnap.id}')">Удалить</button></td></tr>`;
     });
 }
-
 window.deleteProduct = async (id) => {
     if (confirm("Удалить?")) { await deleteDoc(doc(db, "products", id)); location.reload(); }
 };
 
-// --- АДМИНКА: ПРОМОКОДЫ ---
+// Админка: Промокоды
 const addPromoBtn = document.getElementById('add-promo-btn');
 if (addPromoBtn) {
     addPromoBtn.onclick = async () => {
@@ -210,7 +202,6 @@ if (addPromoBtn) {
         alert("Создан!"); location.reload();
     };
 }
-
 async function loadAdminPromos() {
     const body = document.getElementById('promo-list-body');
     if (!body) return;
@@ -221,7 +212,6 @@ async function loadAdminPromos() {
         body.innerHTML += `<tr><td>${p.code}</td><td>${p.discount}%</td><td><button class="btn btn-danger btn-small" onclick="deletePromo('${docSnap.id}')">Удалить</button></td></tr>`;
     });
 }
-
 window.deletePromo = async (id) => {
     if (confirm("Удалить?")) { await deleteDoc(doc(db, "promocodes", id)); location.reload(); }
 };
@@ -230,7 +220,7 @@ if (window.location.pathname.includes('admin.html')) {
     loadAdminProducts(); loadAdminPromos();
 }
 
-// --- АДМИНКА: ПОЛЬЗОВАТЕЛИ ---
+// Админка: Пользователи
 const findUserBtn = document.getElementById('find-user-btn');
 if (findUserBtn) {
     findUserBtn.onclick = async () => {

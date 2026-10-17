@@ -2,11 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.C">
     <title>Каталог товаров - Nixer Shop</title>
+    <!-- Подключаем общие стили -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="min-height: 100vh; display: flex; flex-direction: column;">
+
+    <!-- НАВИГАЦИЯ -->
     <nav>
         <a href="index.html">Главная</a>
         <a href="shop.html" style="color: #2ecc71; font-weight: bold;">Каталог</a>
@@ -15,28 +18,59 @@
         <a href="admin.html" id="admin-link" style="display:none;">Админ-панель</a>
     </nav>
 
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="user-info" style="flex: 1; display: flex; flex-direction: column; align-items: center;">
         <h1 style="font-size: 2.5rem; margin-bottom: 10px;">🛍️ Каталог товаров</h1>
         <p style="color: #aaa; margin-bottom: 40px; text-align: center;">Лучший софт и инвайты по самым доступным ценам</p>
+        
+        <!-- СЕТКА ТОВАРОВ: Сюда app.js будет добавлять карточки из базы данных -->
         <div id="products-grid" class="products-grid">
+            <!-- Эта надпись исчезнет, когда товары загрузятся из Firebase -->
             <div class="loading">Загрузка товаров...</div>
-        </div >
-    </div >
+        </div>
+    </div>
 
+    <!-- ПРОФЕССИОНАЛЬНЫЙ ПОДВАЛ -->
     <footer>
         <div class="footer-grid">
-            <div class="footer-column"><h3>Nixer Shop</h3><p>Лучший магазин цифровых товаров и услуг.</p></div>
-            <div class="footer-column"><h3>Навигация</h3><a href="index.html">Главная</a><a href="shop.html">Каталог</a><a href="profile.html">Профиль</a><a href="offer.html">Оферта</a></div>
-            <div class="footer-column"><h3>Поддержка</h3><a href="https://t.me/Nixer_Exe" target="_blank">✈️ Telegram: @Nixer_Exe</a><a href="mailto:nixershop.official@gmail.com">✉️ Email: nixershop.official@gmail.com</a></div>
-        </div >
+            <!-- Колонка 1: О магазине -->
+            <div class="footer-column">
+                <h3>Nixer Shop</h3>
+                <p>Лучший магазин цифровых товаров и услуг. Качество, скорость и безопасность в каждой покупке.</p>
+                <p style="font-size: 0.8rem; color: #666;">Работаем для вас 24/7</p>
+            </div>
+
+            <!-- Колонка 2: Быстрые ссылки -->
+            <div class="footer-column">
+                <h3>Навигация</h3>
+                <a href="index.html">Главная</a>
+                <a href="shop.html">Каталог</a>
+                <a href="profile.html">Личный кабинет</a>
+                <a href="offer.html">Публичная оферта</a>
+            </div>
+
+            <!-- Колонка 3: Связь и поддержка -->
+            <div class="footer-column">
+                <h3>Поддержка</h3>
+                <a href="https://t.me/Nixer_Exe" target="_blank">✈️ Telegram: @Nixer_Exe</a>
+                <a href="mailto:nixershop.official@gmail.com">✉️ Email: nixershop.official@gmail.com</a>
+                <p style="margin-top: 10px; font-size: 0.8rem;">Среднее время ответа: 2 часа</p>
+            </div>
+        </div>
+
+        <!-- Методы оплаты -->
         <div class="payment-methods">
             <img src="https://i.imgur.com/RzYmEa8.png" class="payment-icon" alt="FunPay">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mir_logo.svg/1200px-Mir_logo.svg.png" class="payment-icon" alt="МИР">
             <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="payment-icon" alt="USDT">
-        </div >
-        <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
-    </footer >
+        </div>
 
+        <div class="footer-bottom">
+            © 2024 Nixer Shop. Все права защищены. | Создано с ❤️ для геймеров.
+        </div>
+    </footer>
+
+    <!-- Подключаем JS как модуль -->
     <script type="module" src="app.js"></script>
-</body >
-</html >
+</body>
+</html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
-<body style="min-height: 100vh; display: flex; flex-direction: column;">
+<body style="min-height: 100vh; display: flex; flex-//direction: column;">
     <nav>
         <a href="index.html">Главная</a>
         <a href="profile.html">Профиль</a>
@@ -15,16 +15,14 @@
         <a href="admin.html" id="admin-link" style="display:none;">Админ-панель</a>
     </nav>
 
-    <div class="user-info">
-        <h1>🛍️ Витрина Nixer Shop</h1>
+    <div class="user-info" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">🛍️ Витрина Nixer Shop</h1>
         <p style="color: #aaa; margin-bottom: 30px;">Лучший софт по доступным ценам</p>
         
-        <!-- Сетка товаров -->
         <div id="products-grid" class="products-grid">
             <div class="loading">Загрузка товаров...</div>
         </div>
 
-        <!-- Блок Входа/Регистрации (Появляется если не авторизован) -->
         <div id="auth-section" style="margin-top: 50px;">
             <div id="login-form" class="admin-container">
                 <h2 style="text-align: center;">🔑 Вход</h2>
@@ -41,7 +39,7 @@
                 <h2 style="text-align: center;">📝 Регистрация</h2>
                 <input type="text" id="reg-nick" class="admin-input" placeholder="Никнейм">
                 <input type="email" id="reg-email" class="admin-input" placeholder="Email">
-                <input type="password" id="reg-pass" class="admin-input" placeholder="Пароль">
+                <input type="password" id="reg-//pass" class="admin-input" placeholder="Пароль">
                 <button class="btn btn-save" id="do-reg" style="background: #3498db;">Создать аккаунт</button>
                 <p style="margin-top:15px; font-size:0.9rem; text-align: center;">Уже есть аккаунт? <a href="#" id="show-login" style="color:#2ecc71;">Войти</a></p>
             </div>
@@ -63,12 +61,11 @@
         </div>
         <div class="payment-methods">
             <img src="https://i.imgur.com/RzYmEa8.png" class="payment-icon" alt="FunPay">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mir_logo.svg/1200px-Mir_//logo.svg.png" class="payment-icon" alt="МИР">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mir_logo.svg/1200px-Mir_logo.svg.png" class="payment-icon" alt="МИР">
             <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="payment-icon" alt="USDT">
         </div>
         <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
     </footer>
-
     <script type="module" src="app.js"></script>
 </body>
 </html>
