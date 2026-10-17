@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Профиль - Nixer Shop</title>
+    <!-- Подключаем общие стили -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Навигация (такая же, как на всех страницах) -->
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="profile.html">Профиль</a>
+        <!-- Ссылка на админку появится только если пользователь админ -->
+        <a href="admin.html" id="admin-link" style="display:none;">Админ-панель</a>
+    </nav>
+
+    <!-- Контейнер профиля -->
+    <div class="user-info">
+        <h1>Личный кабинет</h1>
+        
+        <!-- Блок с данными пользователя -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            
+            <!-- Аватарка пользователя -->
+            <img src="" id="user-avatar" class="avatar" alt="Загрузка аватарки...">
+
+            <!-- Тайтл (здесь будет применен CSS класс для Glow эффекта) -->
+            <div id="user-title" class="user-info">Загрузка тайтла...</div>
+
+            <!-- Никнейм (здесь тоже будет применен CSS класс для Glow эффекта) -->
+            <div id="user-nick" class="user-info">Загрузка ника...</div>
+
+            <!-- UID пользователя (нужен для того, чтобы админ мог найти профиль) -->
+            <div id="user-id" style="font-size: 0.8rem; color: #888; background: #222; padding: 5px 10px; border-radius: 5px; cursor: pointer;" title="Нажмите, чтобы скопировать">
+                ID: Загрузка...
+            </div>
+
+            <br>
+            <!-- Кнопка выхода из аккаунта -->
+            <button class="btn" id="logout-btn" style="background: #ff4d4d; color: white;">Выйти из аккаунта</button>
+        </div>
+    </div>
+
+    <!-- 
+        ВАЖНО: Подключаем app.js как модуль. 
+        Скрипт сам найдет эти ID (user-avatar, user-nick и т.д.) и заполнит их данными из Firebase.
+    -->
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>

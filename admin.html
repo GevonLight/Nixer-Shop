@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ Панель - Nixer Shop</title>
+    <!-- Подключаем те же стили, что и на всем сайте -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Навигация (такая же, как на главной) -->
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="profile.html">Профиль</a>
+        <a href="admin.html">Админ-панель</a>
+    </nav>
+
+    <!-- Основной контейнер админки -->
+    <div class="admin-container">
+        <h2>⚙️ Управление пользователем</h2>
+        <p style="color: gray; font-size: 0.9rem;">Введите UID пользователя из его профиля, чтобы отредактировать данные.</p>
+        
+        <!-- Поиск пользователя -->
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="edit-id" class="admin-input" placeholder="Введите UID пользователя (например: 1AbC2...)">
+            <button class="btn" id="find-user-btn" style="background: #444; color: white; width: 100%;">🔍 Найти пользователя</button>
+        </div>
+        
+        <hr style="margin: 20px 0; border: 0.5px solid #333;">
+
+        <!-- Форма редактирования -->
+        <div id="edit-form">
+            <label>Никнейм:</label>
+            <input type="text" id="edit-nick" class="admin-input" placeholder="Новый никнейм">
+            
+            <label>Тайтл (Роль/Цвет):</label>
+            <select id="edit-title" class="admin-input">
+                <option value="User">User (Белый)</option>
+                <option value="Moderator">Moderator (Зеленый Glow)</option>
+                <option value="Admin">Admin (Красный Glow)</option>
+                <option value=") Медиа длинное">) Медиа длинное (Желтый Glow)</option>
+            </select>
+
+            <label>Ссылка на аватарку:</label>
+            <input type="text" id="edit-avatar" class="admin-input" placeholder="https://ссылка-на-картинку.jpg">
+
+            <button class="btn btn-save" id="save-user-btn">💾 Сохранить изменения</button>
+        </div>
+    </div>
+
+    <!-- 
+        ВАЖНО: Подключаем app.js как модуль. 
+        Именно в app.js прописана логика поиска и сохранения данных в Firebase.
+    -->
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>

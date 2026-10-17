@@ -1,0 +1,272 @@
+/* ============================================================ 
+   1. ОСНОВНЫЕ НАСТРОЙКИ (BASE)
+   ============================================================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212; /* Глубокий темный фон */
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Важно для прижатого подвала */
+}
+
+/* Навигационная панель */
+nav {
+    width: 100%;
+    background: #1e1e1e;
+    padding: 15px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    border-bottom: 2px solid #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 1.1rem;
+}
+
+nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 5px #fff;
+}
+
+/* Контейнеры с контентом */
+.user-info {
+    margin: 40px 20px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* ============================================================ 
+   2. СИСТЕМА ТАЙТЛОВ И НИКОВ (GLOW ЭФФЕКТЫ)
+   ============================================================ */
+.user-info div {
+    margin: 10px 0;
+}
+
+/* 1. User - Обычный белый */
+.title-user, .nick-user { 
+    color: #ffffff; 
+    font-weight: normal;
+}
+
+/* 2. Moderator - Зеленый Glow */
+.title-mod, .nick-mod { 
+    color: #2ecc71; 
+    text-shadow: 0 0 8px #2ecc71, 0 0 15px #2ecc71; 
+    font-weight: bold;
+}
+
+/* 3. Admin - Красный Glow */
+.title-admin, .nick-admin { 
+    color: #ff4d4d; 
+    text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000; 
+    font-weight: bold;
+}
+
+/* 4. ) Медиа длинное - Желтый Glow */
+.title-media, .nick-media { 
+    color: #f1c40f; 
+    text-shadow: 0 0 8px #f1c40f, 0 0 15px #f1c40f; 
+    font-weight: bold;
+}
+
+/* ============================================================ 
+   3. ПРОФИЛЬ И АВАТАРКИ
+   ============================================================ */
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #333;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    margin-bottom: 20px;
+}
+
+/* ============================================================ 
+   4. ФОРМЫ И АДМИН-ПАНЕЛЬ
+   ============================================================ */
+.admin-container {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    margin: 0 auto;
+}
+
+.admin-container h2 {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.admin-input:focus {
+    border-color: #2ecc71;
+    outline: none;
+    box-shadow: 0 0 5px #2ecc71;
+}
+
+/* Кнопки */
+.btn {
+    padding: 12px 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.btn-save { 
+    background: #2ecc71; 
+    color: white; 
+    width: 100%; 
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+}
+
+.btn-save:hover { 
+    background: #27ae60; 
+    transform: translateY(-2px);
+}
+
+/* ============================================================ 
+   5. СТРАНИЦА ОФЕРТЫ
+   =========================================================== */
+.offer-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #1e1e1e;
+    padding: 50px;
+    border-radius: 25px;
+    border: 1px solid #333;
+    text-align: left;
+    line-height: 1.8;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    color: #ccc;
+}
+
+.offer-container h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+}
+
+.offer-container h2 {
+    color: #2ecc71;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-top: 35px;
+}
+
+/* ============================================================ 
+   6. ПРОФЕССИОНАЛЬНЫЙ ПОДВАЛ (FOOTER)
+   ============================================================ */
+footer {
+    width: 100%;
+    background: #181818;
+    padding: 50px 0 20px 0;
+    border-top: 3px solid #2ecc71;
+    margin-top: auto;
+    color: #bbb;
+}
+
+.footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-column h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-column h3::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #2ecc71;
+    margin-top: 8px;
+}
+
+.footer-column a, .footer-column p {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.footer-column a:hover {
+    color: #2ecc71;
+    padding-left: 5px;
+}
+
+.payment-methods {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    opacity: 0.6;
+    filter: grayscale(1);
+    transition: 0.5s;
+}
+
+.payment-methods:hover {
+    opacity: 1;
+    filter: grayscale(0);
+}
+
+.payment-icon {
+    width: 50px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.8rem;
+    color: #666;
+}
