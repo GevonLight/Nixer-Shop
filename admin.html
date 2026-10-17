@@ -4,56 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ Панель - Nixer Shop</title>
-    <!-- Подключаем те же стили, что и на всем сайте -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <!-- Навигация (такая же, как на главной) -->
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
     <nav>
         <a href="index.html">Главная</a>
+        <a href="shop.html">Каталог</a>
         <a href="profile.html">Профиль</a>
-        <a href="admin.html">Админ-панель</a>
+        <a href="offer.html" style="color: #888; font-size: 0.9rem;">Оферта</a>
+        <a href="admin.html" style="color: #2ecc71; font-weight: bold;">Админ-панель</a>
     </nav>
 
-    <!-- Основной контейнер админки -->
-    <div class="admin-container">
-        <h2>⚙️ Управление пользователем</h2>
-        <p style="color: gray; font-size: 0.9rem;">Введите UID пользователя из его профиля, чтобы отредактировать данные.</p>
-        
-        <!-- Поиск пользователя -->
-        <div style="margin-bottom: 20px;">
-            <input type="text" id="edit-id" class="admin-input" placeholder="Введите UID пользователя (например: 1AbC2...)">
-            <button class="btn" id="find-user-btn" style="background: #444; color: white; width: 100%;">🔍 Найти пользователя</button>
-        </div>
-        
-        <hr style="margin: 20px 0; border: 0.5px solid #333;">
+    <div class="admin-container" style="margin-top: 50px;">
+        <h2 style="text-align: center;">⚙️ Управление пользователями</h2>
+        <input type="text" id="edit-id" class="admin-input" placeholder="Введите UID пользователя">
+        <button class="btn btn-save" id="find-user-btn" style="background: #444; margin-bottom: 20px;">🔍 Найти пользователя</button>
+        <hr style="border: 0.5px solid #333; margin-bottom: 20px;">
+        <label>Никнейм:</label>
+        <input type="text" id="edit-nick" class="admin-input">
+        <label>Тайтл:</label>
+        <select id="edit-title" class="admin-input">
+            <option value="User">User</option>
+            <option value="Moderator">Moderator</option>
+            <option value="Admin">Admin</option>
+            <option value=") Медиа длинное">) Медиа длинное</option>
+        </select>
+        <label>Аватарка (URL):</label>
+        <input type="text" id="edit-avatar" class="admin-input">
+        <button class="btn btn-save" id="save-user-btn">💾 Сохранить изменения</button>
+    </div >
 
-        <!-- Форма редактирования -->
-        <div id="edit-form">
-            <label>Никнейм:</label>
-            <input type="text" id="edit-nick" class="admin-input" placeholder="Новый никнейм">
-            
-            <label>Тайтл (Роль/Цвет):</label>
-            <select id="edit-title" class="admin-input">
-                <option value="User">User (Белый)</option>
-                <option value="Moderator">Moderator (Зеленый Glow)</option>
-                <option value="Admin">Admin (Красный Glow)</option>
-                <option value=") Медиа длинное">) Медиа длинное (Желтый Glow)</option>
-            </select>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-column"><h3>Nixer Shop</h3><p>Админ-центр управления.</p></div>
+            <div class="footer-column"><h3>Навигация</h3><a href="index.html">Главная</a><a href="shop.html">Каталог</a><a href="profile.html">Профиль</a><a href="offer.html">Оферта</a></div>
+            <div class="footer-column"><h3>Поддержка</h3><a href="https://t.//t.me/Nixer_Exe" target="_blank">✈️ Telegram: @Nixer_Exe</a></div>
+        </div >
+        <div class="footer-bottom">© 2024 Nixer Shop. Все права защищены.</div>
+    </footer >
 
-            <label>Ссылка на аватарку:</label>
-            <input type="text" id="edit-avatar" class="admin-input" placeholder="https://ссылка-на-картинку.jpg">
-
-            <button class="btn btn-save" id="save-user-btn">💾 Сохранить изменения</button>
-        </div>
-    </div>
-
-    <!-- 
-        ВАЖНО: Подключаем app.js как модуль. 
-        Именно в app.js прописана логика поиска и сохранения данных в Firebase.
-    -->
     <script type="module" src="app.js"></script>
-
-</body>
-</html>
+</body >
+</html >
