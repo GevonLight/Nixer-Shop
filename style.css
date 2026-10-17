@@ -1,22 +1,19 @@
 /* ============================================================ 
    1. ОСНОВНЫЕ НАСТРОЙКИ (BASE)
    ============================================================ */
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-    background-color: #121212; /* Глубокий темный фон */
+    background-color: #121212;
     color: #e0e0e0;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Важно для прижатого подвала */
+    min-height: 100vh;
 }
 
-/* Навигационная панель */
 nav {
     width: 100%;
     background: #1e1e1e;
@@ -43,7 +40,6 @@ nav a:hover {
     text-shadow: 0 0 5px #fff;
 }
 
-/* Контейнеры с контентом */
 .user-info {
     margin: 40px 20px;
     text-align: center;
@@ -51,38 +47,12 @@ nav a:hover {
 }
 
 /* ============================================================ 
-   2. СИСТЕМА ТАЙТЛОВ И НИКОВ (GLOW ЭФФЕКТЫ)
+   2. СИСТЕМА ТАЙТЛОВ (GLOW ЭФФЕКТЫ)
    ============================================================ */
-.user-info div {
-    margin: 10px 0;
-}
-
-/* 1. User - Обычный белый */
-.title-user, .nick-user { 
-    color: #ffffff; 
-    font-weight: normal;
-}
-
-/* 2. Moderator - Зеленый Glow */
-.title-mod, .nick-mod { 
-    color: #2ecc71; 
-    text-shadow: 0 0 8px #2ecc71, 0 0 15px #2ecc71; 
-    font-weight: bold;
-}
-
-/* 3. Admin - Красный Glow */
-.title-admin, .nick-admin { 
-    color: #ff4d4d; 
-    text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000; 
-    font-weight: bold;
-}
-
-/* 4. ) Медиа длинное - Желтый Glow */
-.title-media, .nick-media { 
-    color: #f1c40f; 
-    text-shadow: 0 0 8px #f1c40f, 0 0 15px #f1c40f; 
-    font-weight: bold;
-}
+.title-user, .nick-user { color: #ffffff; font-weight: normal; }
+.title-mod, .nick-mod { color: #2ecc71; text-shadow: 0 0 8px #2ecc71, 0 0 15px #2ecc71; font-weight: bold; }
+.title-admin, .nick-admin { color: #ff4d4d; text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000; font-weight: bold; }
+.title-media, .nick-media { color: #f1c40f; text-shadow: 0 0 8px #f1c40f, 0 0 15px #f1c40f; font-weight: bold; }
 
 /* ============================================================ 
    3. ПРОФИЛЬ И АВАТАРКИ
@@ -111,11 +81,7 @@ nav a:hover {
     margin: 0 auto;
 }
 
-.admin-container h2 {
-    color: #fff;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
+.admin-container h2 { color: #fff; margin-top: 0; margin-bottom: 20px; }
 
 .admin-input {
     width: 100%;
@@ -135,7 +101,6 @@ nav a:hover {
     box-shadow: 0 0 5px #2ecc71;
 }
 
-/* Кнопки */
 .btn {
     padding: 12px 24px;
     cursor: pointer;
@@ -155,14 +120,71 @@ nav a:hover {
     box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
 }
 
-.btn-save:hover { 
-    background: #27ae60; 
-    transform: translateY(-2px);
-}
+.btn-save:hover { background: #27ae60; transform: translateY(-2px); }
 
 /* ============================================================ 
-   5. СТРАНИЦА ОФЕРТЫ
-   =========================================================== */
+   5. ВИТРИНА ТОВАРОВ
+   ============================================================ */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: #2ecc71;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    background: #2a2a2a;
+}
+
+.product-name { color: #fff; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; }
+.product-description { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; height: 40px; overflow: hidden; }
+.product-price { color: #2ecc71; font-size: 1.6rem; font-weight: bold; margin-bottom: 20px; }
+
+.btn-buy {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-buy:hover { background: #27ae60; box-shadow: 0 0 15px #2ecc71; }
+.loading { color: #666; font-size: 1.2rem; grid-column: 1 / -1; text-align: center; }
+
+/* ============================================================ 
+   6. СТРАНИЦА ОФЕРТЫ
+   ============================================================ */
 .offer-container {
     max-width: 900px;
     margin: 40px auto;
@@ -175,23 +197,11 @@ nav a:hover {
     box-shadow: 0 15px 40px rgba(0,0,0,0.8);
     color: #ccc;
 }
-
-.offer-container h1 {
-    text-align: center;
-    color: #ffffff;
-    font-size: 2.2rem;
-    margin-bottom: 40px;
-}
-
-.offer-container h2 {
-    color: #2ecc71;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-    margin-top: 35px;
-}
+.offer-container h1 { text-align: center; color: #ffffff; font-size: 2.2rem; margin-bottom: 40px; }
+.offer-container h2 { color: #2ecc71; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 35px; }
 
 /* ============================================================ 
-   6. ПРОФЕССИОНАЛЬНЫЙ ПОДВАЛ (FOOTER)
+   7. ПРОФЕССИОНАЛЬНЫЙ ПОДВАЛ (FOOTER)
    ============================================================ */
 footer {
     width: 100%;
@@ -236,10 +246,7 @@ footer {
     margin-bottom: 12px;
 }
 
-.footer-column a:hover {
-    color: #2ecc71;
-    padding-left: 5px;
-}
+.footer-column a:hover { color: #2ecc71; padding-left: 5px; }
 
 .payment-methods {
     margin-top: 30px;
@@ -251,17 +258,8 @@ footer {
     transition: 0.5s;
 }
 
-.payment-methods:hover {
-    opacity: 1;
-    filter: grayscale(0);
-}
-
-.payment-icon {
-    width: 50px;
-    height: 30px;
-    object-fit: contain;
-}
-
+.payment-methods:hover { opacity: 1; filter: grayscale(0); }
+.payment-icon { width: 50px; height: 30px; object-fit: contain; }
 .footer-bottom {
     text-align: center;
     margin-top: 40px;
